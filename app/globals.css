@@ -1,27 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-primary: #0d1526;
+  --bg-secondary: #1a2338;
+  --bg-card: #1e2a40;
+  --border: #2e3a52;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #3b5bdb;
+  --accent-hover: #2d44b0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #1a2338; }
+::-webkit-scrollbar-thumb { background: #2e3a52; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3b5bdb; }
+
+/* Leaflet overrides */
+.leaflet-container {
+  background: #1a2338;
+  font-family: 'Inter', sans-serif;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #1e2a40;
+  border: 1px solid #2e3a52;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  color: #f1f5f9;
+}
+
+.leaflet-popup-tip {
+  background: #1e2a40;
+}
+
+.leaflet-popup-close-button {
+  color: #94a3b8 !important;
+}
+
+.leaflet-control-zoom a {
+  background: #1e2a40 !important;
+  border-color: #2e3a52 !important;
+  color: #94a3b8 !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #2e3a52 !important;
+  color: #f1f5f9 !important;
+}
+
+/* Badge colors */
+@layer components {
+  .badge-critical { @apply bg-red-900/50 text-red-300 border border-red-700/50; }
+  .badge-high { @apply bg-orange-900/50 text-orange-300 border border-orange-700/50; }
+  .badge-moderate { @apply bg-yellow-900/50 text-yellow-300 border border-yellow-700/50; }
+  .badge-low { @apply bg-green-900/50 text-green-300 border border-green-700/50; }
+  .badge-info { @apply bg-blue-900/50 text-blue-300 border border-blue-700/50; }
+
+  .card { @apply bg-[#1e2a40] border border-[#2e3a52] rounded-xl; }
+  .card-hover { @apply hover:border-[#3b5bdb]/50 transition-all duration-200; }
+
+  .btn-primary { @apply bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-150 text-sm; }
+  .btn-secondary { @apply bg-[#2e3a52] hover:bg-[#3a4a66] text-slate-200 font-medium px-4 py-2 rounded-lg transition-colors duration-150 text-sm border border-[#3a4a66]; }
+  .btn-danger { @apply bg-red-700 hover:bg-red-600 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-150 text-sm; }
+
+  .input { @apply bg-[#1a2338] border border-[#2e3a52] text-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 placeholder-slate-500 transition; }
+
+  .section-title { @apply text-lg font-semibold text-slate-100; }
+  .section-sub { @apply text-sm text-slate-400; }
+}
+
+/* Print styles */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; color: black; }
+  .card { background: white; border: 1px solid #ccc; }
 }
