@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { Shield, CheckCircle, AlertTriangle, Plus, MapPin, Search, Activity, User, Home, ArrowLeft } from 'lucide-react';
+import { Shield, CheckCircle, AlertTriangle, Plus, MapPin, Search, Activity, User, Home, ArrowLeft, Users } from 'lucide-react';
 
 export default function CitizenAppPage() {
   const [status, setStatus] = useState<'NONE' | 'SAFE' | 'SOS' | 'MEDICAL'>('NONE');
