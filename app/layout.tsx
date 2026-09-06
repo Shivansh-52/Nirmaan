@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import JudgeGuideModal from '@/components/JudgeGuideModal'
 
 export const metadata: Metadata = {
   title: 'NIRMAAN — Intelligent Disaster Risk & Relocation Planning Platform',
@@ -22,7 +23,10 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
       </head>
-      <body>{children}</body>
+      <body className="antialiased">
+        {children}
+        <JudgeGuideModal />
+      </body>
     </html>
   )
 }

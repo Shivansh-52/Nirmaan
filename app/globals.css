@@ -1,19 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg-primary: #0d1526;
-  --bg-secondary: #1a2338;
-  --bg-card: #1e2a40;
-  --border: #2e3a52;
-  --text-primary: #f1f5f9;
+  --bg-primary: #070b14;
+  --bg-secondary: #0b1120;
+  --bg-card: rgba(15, 23, 42, 0.75);
+  --border: rgba(30, 41, 59, 0.7);
+  --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
-  --accent: #3b5bdb;
-  --accent-hover: #2d44b0;
+  --accent-cyan: #0284c7;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-crimson: #ef4444;
 }
 
 * {
@@ -24,79 +26,150 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #070b14;
 }
 
 body {
-  background-color: var(--bg-primary);
+  background-color: #070b14;
   color: var(--text-primary);
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: 
+    radial-gradient(ellipse 80% 80% at 50% -20%, rgba(2, 132, 199, 0.08), rgba(255, 255, 255, 0)),
+    radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.04), transparent 40%);
+  background-attachment: fixed;
 }
 
-/* Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #1a2338; }
-::-webkit-scrollbar-thumb { background: #2e3a52; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #3b5bdb; }
+::-webkit-scrollbar-track { background: #0b1120; }
+::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #0284c7; }
+
+/* Radar & Pulse Animations */
+@keyframes radarSweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes beaconPulse {
+  0% { transform: scale(0.95); opacity: 0.9; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+  70% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.95); opacity: 0.9; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+@keyframes emeraldPulse {
+  0% { transform: scale(0.95); opacity: 0.9; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  70% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); opacity: 0.9; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.radar-sweep {
+  animation: radarSweep 4s linear infinite;
+  transform-origin: center;
+}
+
+.beacon-red {
+  animation: beaconPulse 2s infinite;
+}
+
+.beacon-green {
+  animation: emeraldPulse 2s infinite;
+}
 
 /* Leaflet overrides */
 .leaflet-container {
-  background: #1a2338;
+  background: #090e1a !important;
   font-family: 'Inter', sans-serif;
 }
 
 .leaflet-popup-content-wrapper {
-  background: #1e2a40;
-  border: 1px solid #2e3a52;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  color: #f1f5f9;
+  background: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.8) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6) !important;
+  color: #f8fafc !important;
 }
 
 .leaflet-popup-tip {
-  background: #1e2a40;
+  background: rgba(15, 23, 42, 0.95) !important;
 }
 
 .leaflet-popup-close-button {
   color: #94a3b8 !important;
 }
 
+.leaflet-control-zoom {
+  border: 1px solid rgba(51, 65, 85, 0.8) !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
 .leaflet-control-zoom a {
-  background: #1e2a40 !important;
-  border-color: #2e3a52 !important;
+  background: rgba(15, 23, 42, 0.9) !important;
+  border-color: rgba(51, 65, 85, 0.8) !important;
   color: #94a3b8 !important;
 }
 
 .leaflet-control-zoom a:hover {
-  background: #2e3a52 !important;
-  color: #f1f5f9 !important;
+  background: #1e293b !important;
+  color: #38bdf8 !important;
 }
 
-/* Badge colors */
+/* Tactical Glassmorphism Tokens */
 @layer components {
-  .badge-critical { @apply bg-red-900/50 text-red-300 border border-red-700/50; }
-  .badge-high { @apply bg-orange-900/50 text-orange-300 border border-orange-700/50; }
-  .badge-moderate { @apply bg-yellow-900/50 text-yellow-300 border border-yellow-700/50; }
-  .badge-low { @apply bg-green-900/50 text-green-300 border border-green-700/50; }
-  .badge-info { @apply bg-blue-900/50 text-blue-300 border border-blue-700/50; }
+  .badge-critical { @apply bg-red-950/60 text-red-300 border border-red-700/60; }
+  .badge-high { @apply bg-orange-950/60 text-orange-300 border border-orange-700/60; }
+  .badge-moderate { @apply bg-yellow-950/60 text-yellow-300 border border-yellow-700/60; }
+  .badge-low { @apply bg-emerald-950/60 text-emerald-300 border border-emerald-700/60; }
+  .badge-info { @apply bg-sky-950/60 text-sky-300 border border-sky-700/60; }
 
-  .card { @apply bg-[#1e2a40] border border-[#2e3a52] rounded-xl; }
-  .card-hover { @apply hover:border-[#3b5bdb]/50 transition-all duration-200; }
+  .card { 
+    @apply bg-slate-900/75 backdrop-blur-md border border-slate-800/80 rounded-xl shadow-lg; 
+  }
+  .card-hover { 
+    @apply hover:border-sky-500/50 hover:shadow-sky-950/30 hover:shadow-xl transition-all duration-200; 
+  }
+  .card-crimson {
+    @apply bg-red-950/25 border border-red-800/40 shadow-red-950/20;
+  }
+  .card-emerald {
+    @apply bg-emerald-950/25 border border-emerald-800/40 shadow-emerald-950/20;
+  }
+  .card-amber {
+    @apply bg-amber-950/25 border border-amber-800/40 shadow-amber-950/20;
+  }
+  .card-cyan {
+    @apply bg-sky-950/25 border border-sky-800/40 shadow-sky-950/20;
+  }
 
-  .btn-primary { @apply bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-150 text-sm; }
-  .btn-secondary { @apply bg-[#2e3a52] hover:bg-[#3a4a66] text-slate-200 font-medium px-4 py-2 rounded-lg transition-colors duration-150 text-sm border border-[#3a4a66]; }
-  .btn-danger { @apply bg-red-700 hover:bg-red-600 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-150 text-sm; }
+  .btn-primary { 
+    @apply bg-sky-600 hover:bg-sky-500 text-white font-medium px-4 py-2 rounded-lg transition-all duration-150 text-sm shadow-md shadow-sky-900/30 active:scale-[0.98]; 
+  }
+  .btn-secondary { 
+    @apply bg-slate-800/90 hover:bg-slate-700 text-slate-200 font-medium px-4 py-2 rounded-lg transition-all duration-150 text-sm border border-slate-700/80 shadow-sm active:scale-[0.98]; 
+  }
+  .btn-danger { 
+    @apply bg-red-600 hover:bg-red-500 text-white font-medium px-4 py-2 rounded-lg transition-all duration-150 text-sm shadow-md shadow-red-900/30 active:scale-[0.98]; 
+  }
+  .btn-emerald {
+    @apply bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-4 py-2 rounded-lg transition-all duration-150 text-sm shadow-md shadow-emerald-900/30 active:scale-[0.98];
+  }
 
-  .input { @apply bg-[#1a2338] border border-[#2e3a52] text-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 placeholder-slate-500 transition; }
+  .input { 
+    @apply bg-slate-900/90 border border-slate-700/70 text-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-sky-500/70 placeholder-slate-500 transition; 
+  }
 
-  .section-title { @apply text-lg font-semibold text-slate-100; }
-  .section-sub { @apply text-sm text-slate-400; }
+  .section-title { @apply text-base sm:text-lg font-semibold text-slate-100 tracking-tight; }
+  .section-sub { @apply text-xs sm:text-sm text-slate-400; }
 }
 
 /* Print styles */
 @media print {
   .no-print { display: none !important; }
-  body { background: white; color: black; }
-  .card { background: white; border: 1px solid #ccc; }
+  body { background: white !important; color: black !important; background-image: none !important; }
+  .card { background: white !important; border: 1px solid #999 !important; color: black !important; box-shadow: none !important; }
+  .print-section { display: block !important; }
 }

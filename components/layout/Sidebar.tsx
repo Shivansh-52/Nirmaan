@@ -22,6 +22,7 @@ export const navItems = [
   { href: '/dashboard/priority', label: 'Priority Cases', icon: Star },
   { href: '/dashboard/analytics', label: 'Analytics', icon: BarChart3 },
   { href: '/dashboard/alerts', label: 'Alerts', icon: Bell, badge: 4 },
+  { href: '/team', label: 'Our Team', icon: Users },
   { href: '/dashboard/settings', label: 'Settings', icon: Settings },
 ];
 
